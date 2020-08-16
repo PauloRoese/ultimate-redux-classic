@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 
 import { bindActionCreators } from 'redux'
 
-import * as conterAdd from './actions';
+import { Creators as Actions } from './store/duck/reducers/reducesItem'
 
 // import { Container } from './styles';
 
 function Contador(props) {
-    const { addItem, items } = props
+    const { addItem, conters } = props
 
     const addCount = (txt) => {
         console.log(props)
@@ -18,7 +18,7 @@ function Contador(props) {
     return (
         <>
             <h2>
-                Numedo de item = {items.itemsList.length}
+                Numedo de item = {conters.length}
             </h2>
             <button
                 type="button"
@@ -29,11 +29,11 @@ function Contador(props) {
 }
 
 const mapStateToPrps = state => ({
-    items: state
+    conters: state.reduceItem
 })
 // podendo usar assim ou com o bindActionCreators
 const mapDispatchToProps = dispatch => (
-    bindActionCreators(conterAdd,dispatch)
+    bindActionCreators(Actions, dispatch)
 )
 
 export default connect(mapStateToPrps, mapDispatchToProps)(Contador);

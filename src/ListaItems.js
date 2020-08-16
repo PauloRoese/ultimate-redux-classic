@@ -5,12 +5,11 @@ import { connect } from 'react-redux'
 
 import { bindActionCreators } from 'redux'
 
-import * as actions from './actions'
-import contador from './contador';
+import { Creators as Actions } from './store/duck/reducers/reducesItem'
 
 function ListaItems(props) {
 
-    const { addItem, removeItem , items} = props
+    const { addItem, removeItem, items } = props
     const [text, setText] = useState('');
 
     const onChangeText = (ev) => {
@@ -30,8 +29,7 @@ function ListaItems(props) {
     return (
         <div>
             <ul>
-
-                {items.itemsList.map(item => (
+                {items.map(item => (
                     <>
                         <li key={item.id}>{item.text}</li>
                         <button
@@ -57,11 +55,11 @@ function ListaItems(props) {
 }
 
 const mapStateToProps = state => ({
-    items: state
+    items: state.reduceItem
 })
 
 const mapDispatcheToProps = dispatch => (
-    bindActionCreators(actions, dispatch)
+    bindActionCreators(Actions, dispatch)
 )
 
 export default connect(mapStateToProps, mapDispatcheToProps)(ListaItems);
